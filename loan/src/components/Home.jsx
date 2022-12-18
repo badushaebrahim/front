@@ -3,9 +3,33 @@ import Card from '@mui/material/Card';
 import { Button, TextField } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
+
+ import { useFormik } from 'formik';
+ 
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 function Home() {
+	const validate = values => {
+		const errors = {};
+		if (!values.firstName) {
+		  errors.firstName = 'Required';
+		} else if (values.firstName.length > 15) {
+		  errors.firstName = 'Must be 15 characters or less';
+		}
+	      
+		if (!values.lastName) {
+		  errors.lastName = 'Required';
+		} else if (values.lastName.length > 20) {
+		  errors.lastName = 'Must be 20 characters or less';
+		}
+	      
+		if (!values.email) {
+		  errors.email = 'Required';
+		} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+		  errors.email = 'Invalid email address';
+		}
+	      
+		return errors;
+	      };
 	const [tenure, setTenure] = React.useState('');
 	const [salary, setSalary] = React.useState('');
 	const handleChangeTenure = (e) => {
@@ -14,15 +38,34 @@ function Home() {
 	      };const handleChangeSalarye = (e) => {
 		setSalary(e.target.value);
 		
-	      };
+	      };const formik = useFormik({
+		initialValues: {
+		  firstName: '',
+		  age: '',
+		  amount : '',
+		  Nid : ' ',
+		  Tenure : '',
+		  Salary: ''
+		},
+		validate,
+		onSubmit: values => {
+		  alert(JSON.stringify(values, null, 2));
+		},
+	      });
 	return (
 		<div>
-				 <Card sx={{ maxWidth: 345 }}>
+		 <form onSubmit={formik.handleSubmit}>
+				 <Card sx={{ maxWidth: 545 }}>
 					 <h1>Hellos</h1>
 					 
-					 <TextField id="outlined-basic" label="Name" variant="outlined" />
+					 <TextField id="outlined-basic"  label="Name" onChange={formik.handleChange}
+         				onBlur={formik.handleBlur}
+         				value={formik.values.firstName} variant="outlined" />
+					 <p>{formik.errors.firstName ? <div>{formik.errors.firstName}</div> : null}</p>
 					 <br/>
-					 <TextField id="outlined-basic" label="Age" variant="outlined" />
+					 <TextField id="outlined-basic" onBlur={formik.handleBlur}
+         				value={formik.values.lage} label="Age" variant="outlined" />
+					  {formik.errors.age ? <div>{formik.errors.age}</div> : null}
 					 <br/>
 					 <TextField id="outlined-basic" label="Amount" variant="outlined" />
 					 <br/>
@@ -59,9 +102,21 @@ function Home() {
 
 					 </Select><br/>
 					 <br/>
+					 <TextField id="outlined-basic" label="Installment" variant="outlined" />
+					 <br/>
+					 <TextField id="outlined-basic" label="intrestRate" variant="outlined" />
+					 <br/>
+					 <TextField id="outlined-basic" label="totalIntrestAmount" variant="outlined" />
+					 <br/>
+					 <TextField id="outlined-basic" label="fee" variant="outlined" />
+					 <br/>
+					 <TextField id="outlined-basic" label="total" variant="outlined" />
+					 <br/>
 					 <Button variant="contained">Submit</Button>
 				 </Card>
+		</form>
 		</div>
+
 	)
 }
 
