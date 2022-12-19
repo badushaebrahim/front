@@ -1,6 +1,6 @@
 import { CardActionArea } from '@mui/material'
 import React from 'react'
-var imageName = require('./assets/Celebration.gif')
+import imageName from './assets/Celebration.gif';
 function Submited() {
 	return (
 		<div>

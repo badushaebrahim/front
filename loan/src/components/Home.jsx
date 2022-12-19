@@ -3,11 +3,64 @@ import Card from '@mui/material/Card';
 import { Button, TextField } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-
+import axios from 'axios';
  import { useFormik } from 'formik';
  
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 function Home() {
+
+const checkOffer =() =>{
+	
+	var data = '{  "amount": {{amount}},  "tenure": "{{Tenure}}"}';
+	
+	
+	
+	var config = {
+	
+	  method: 'post',
+	
+	  url: 'localhost:8007/immobilier/v1/loan-application/loan/loan-offers?country=JO&lang=en',
+	
+	  headers: { 
+	
+	    'source-id': 'neo', 
+	
+	    'uuid': 'ba71d13f-c472-4f30-bf51-1fb92adb546c', 
+	
+	    'x-channel-identifier': 'MB', 
+	
+	    'x-fapi-interaction-id': '7f089413-90d1-470e-8260-16297785b8bf', 
+	
+	    'x-jws-signature': 'officia Duis non cupidatat incididunt', 
+	
+	    'Content-Type': 'application/json', 
+	
+	    'Accept': '*/*'
+	
+	  },
+	
+	  data : data
+	
+	};
+	
+	axios(config)
+	
+	.then(function (response) {
+	
+	  console.log(JSON.stringify(response.data));
+	
+	})
+	
+	.catch(function (error) {
+	
+	  console.log(error);
+	
+	});
+}
+
+
+
+
 	const validate = values => {
 		const errors = {};
 		 if (values.firstName.length > 15) {
