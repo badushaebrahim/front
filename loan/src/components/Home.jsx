@@ -8,7 +8,7 @@ import axios from 'axios';
  
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 function Home() {
-
+const url ="localhost:8007/immobilier/v1/loan-application/loan"k
 const checkOffer =() =>{
 	
 	var data = '{  "amount": {{amount}},  "tenure": "{{Tenure}}"}';
@@ -19,7 +19,7 @@ const checkOffer =() =>{
 	
 	  method: 'post',
 	
-	  url: 'localhost:8007/immobilier/v1/loan-application/loan/loan-offers?country=JO&lang=en',
+	  url: url+'/loan-offers?country=JO&lang=en',
 	
 	  headers: { 
 	
@@ -57,7 +57,52 @@ const checkOffer =() =>{
 	
 	});
 }
+const confirmLoan = (values) =>{var data = '{\n  "age": {{values.age}},\n  "loanAmount": {{values.amount}},\n  "name": "{{values.name}}",\n  "nationalId": "{{values.NId}}",\n  "salaryRange": "{{salary}}",\n  "tenure": "{{Month}}"\n}';
 
+
+
+var config = {
+  method: 'post',
+
+  url: url+'/submission?country=JO&lang=en',
+
+  headers: { 
+
+    'source-id': 'neo', 
+
+    'uuid': '53d5d2dd-82c7-4111-8106-503110b97b77', 
+
+    'x-channel-identifier': 'MB', 
+
+    'x-fapi-interaction-id': 'd020b730-cc9d-44dd-bfd3-d3bd5bd59f07', 
+
+    'x-jws-signature': 'officia Duis non cupidatat incididunt', 
+
+    'Content-Type': 'application/json', 
+
+    'Accept': '*/*'
+
+  },
+
+  data : data
+
+};
+
+
+
+axios(config)
+
+.then(function (response) {
+
+  console.log(JSON.stringify(response.data));
+
+})
+
+.catch(function (error) {
+
+  console.log(error);
+
+});}
 
 
 
