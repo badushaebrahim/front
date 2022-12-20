@@ -94,8 +94,8 @@ function Home() {
 
 				.then(function (response) {
 
-					console.log(JSON.stringify(response.data));
-					if(JSON.stringify(response.data.data.status)=="CONFIRMED"){
+					console.log(JSON.stringify(response.data.data.status));
+					if(JSON.stringify(response.data.data.status)=='"CONFIRMED"'){
 			// 			const navigate = useNavigate();
 			// navigate('/submited');
 			window.location.href = "/submited";
