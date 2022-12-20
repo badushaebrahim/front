@@ -8,7 +8,7 @@ import axios from 'axios';
  
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 function Home() {
-const url ="localhost:8007/immobilier/v1/loan-application/loan"k
+const url ="localhost:8007/immobilier/v1/loan-application/loan"
 const checkOffer =() =>{
 	var data = '{  "amount": {{amount}},  "tenure": "{{Tenure}}"}';
 
@@ -202,7 +202,7 @@ axios(config)
 					 <br/>
 					 <TextField id="outlined-basic" value={installment} label="Installment" variant="outlined" />
 					 <br/>
-					 <TextField id="outlined-basic" value{intrestRate} label="intrestRate" variant="outlined" />
+					 <TextField id="outlined-basic" value={intrestRate} label="intrestRate" variant="outlined" />
 					 <br/>
 					 <TextField id="outlined-basic" value={totalIntrestAmount} label="totalIntrestAmount" variant="outlined" />
 					 <br/>
