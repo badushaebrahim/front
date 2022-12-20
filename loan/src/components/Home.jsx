@@ -10,10 +10,8 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 function Home() {
 const url ="localhost:8007/immobilier/v1/loan-application/loan"k
 const checkOffer =() =>{
-	
 	var data = '{  "amount": {{amount}},  "tenure": "{{Tenure}}"}';
-	
-	
+
 	
 	var config = {
 	
@@ -48,6 +46,10 @@ const checkOffer =() =>{
 	.then(function (response) {
 	
 	  console.log(JSON.stringify(response.data));
+	setInstallment(response.data.data.installment)
+	setIntrestRate(response.data.data.intrestRate)
+	setTotalIntrestAmount(response.data.data.totalIntrestAmount)
+	setFee(response.data.data.fee)
 	
 	})
 	
@@ -57,7 +59,7 @@ const checkOffer =() =>{
 	
 	});
 }
-const confirmLoan = (values) =>{var data = '{\n  "age": {{values.age}},\n  "loanAmount": {{values.amount}},\n  "name": "{{values.name}}",\n  "nationalId": "{{values.NId}}",\n  "salaryRange": "{{salary}}",\n  "tenure": "{{Month}}"\n}';
+const confirmLoan = (values) =>{var data = '{ "age": {{values.age}}, "loanAmount": {{values.amount}}, "name": "{{values.name}}",  "nationalId": "{{values.NId}}",  "salaryRange": "{{salary}}", "tenure": "{{Month}}"}';
 
 
 
@@ -122,6 +124,11 @@ axios(config)
 	      };
 	const [tenure, setTenure] = React.useState('');
 	const [salary, setSalary] = React.useState('');
+	const[fee,setFee]=React.useState('');
+	const[totalIntrestAmount,setTotalIntrestAmount]=React.useState('');
+	const[intrestRate,setIntrestRate]=React.useState('');
+	const[installment,setInstallment]=React.useState('');
+
 	const handleChangeTenure = (e) => {
 		setTenure(e.target.value);
 	alert(tenure)
@@ -140,6 +147,7 @@ axios(config)
 		validate,
 		onSubmit: values => {
 		  alert(JSON.stringify(values, null, 2));
+
 		},
 	      });
 	return (
@@ -192,15 +200,15 @@ axios(config)
 
 					 </Select><br/>
 					 <br/>
-					 <TextField id="outlined-basic" label="Installment" variant="outlined" />
+					 <TextField id="outlined-basic" value={installment} label="Installment" variant="outlined" />
 					 <br/>
-					 <TextField id="outlined-basic" label="intrestRate" variant="outlined" />
+					 <TextField id="outlined-basic" value{intrestRate} label="intrestRate" variant="outlined" />
 					 <br/>
-					 <TextField id="outlined-basic" label="totalIntrestAmount" variant="outlined" />
+					 <TextField id="outlined-basic" value={totalIntrestAmount} label="totalIntrestAmount" variant="outlined" />
 					 <br/>
-					 <TextField id="outlined-basic" label="fee" variant="outlined" />
+					 <TextField id="outlined-basic" value={fee} label="fee" variant="outlined" />
 					 <br/>
-					 <TextField id="outlined-basic" label="total" variant="outlined" />
+					 <TextField id="outlined-basic" validate={total} label="total" variant="outlined" />
 					 <br/>
 					 <Button variant="contained">Submit</Button>
 				 </Card>
