@@ -115,7 +115,7 @@ axios(config)
 					label="Month"
 					onChange={handleChangeTenure}
 					>
-					<MenuItem value={"Month12"}>12 Month</MenuItem>
+						
 					<MenuItem value={"Month24"}>24 Month</MenuItem>
 					<MenuItem value={"Month36"}>36 Month</MenuItem>
 					<MenuItem value={"Monthl̥48"}>48 Month</MenuItem>
